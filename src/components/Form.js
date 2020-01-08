@@ -22,17 +22,6 @@ class Form extends React.Component {
   }
 
 
-  // handleSubmit = event => {
-  //   event.preventDefaul(); 
-  //   formData = {
-  //     firstName: this.state.firstName, 
-  //     lastName: this.state.lastName
-  //   }
-  //   this.doSomethingWithThisData(formData)
-  //   /* 👆 This function could be defined in the current component or passed down as a prop. 
-  //     currently, we don't have any server to send our data.,  
-  //   */
-  // } 
 
   render() {
     return (
