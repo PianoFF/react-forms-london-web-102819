@@ -5,7 +5,7 @@ import React from 'react';
 
 class Form extends React.Component {
   render() {
-    const {handleFirstNameChange, handleLastNameChange, handleSubmit ,formData} = this.props; 
+    const {handleChange, handleSubmit ,formData} = this.props; 
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -15,7 +15,7 @@ class Form extends React.Component {
             id='first-name' 
             name="firstName" 
             placeholder='first-name' 
-            onChange={handleFirstNameChange} 
+            onChange={handleChange} 
             value={formData.firstName}
             />
           <br></br>
@@ -25,7 +25,7 @@ class Form extends React.Component {
             id='last-name' 
             name="lastName" 
             placeholder='last-name' 
-            onChange={event => handleLastNameChange(event)} 
+            onChange={handleChange} 
             value={formData.lastName}
             />
           <input type='submit'/> 

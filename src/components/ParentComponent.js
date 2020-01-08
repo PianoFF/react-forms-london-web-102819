@@ -9,7 +9,7 @@ let initialState = {
 }
 class ParentComponent extends React.Component {
   state = initialState; 
- 
+ /* CAN THESE TWO BE ABSTRACTED? 
   handleFirstNameChange = event => {
     this.setState({
       firstName: event.target.value
@@ -21,6 +21,22 @@ class ParentComponent extends React.Component {
       lastName: event.target.value
     })
   }
+👇*/
+
+/*
+Since each one is changing a different value in our state, we've got them separated here. 
+Imagine that once we've got a more complicated form, this route may result in a very cluttered component.
+Instead of separate methods, we could actually condense this down into one abstracted component:
+  🙌Since event is being passed in as the argument, we have access to some of the event.target 
+  attributes that may be present.
+  If we give our inputs name attributes, we can access them as event.target.name:
+*/
+  handleChange = event => {
+      this.setState({
+          [event.target.name]: event.target.value
+      })
+  }
+
 
   handleFormSubmit = event =>{
       event.preventDefault(); 
@@ -32,8 +48,7 @@ class ParentComponent extends React.Component {
         <div>
             <Form
                 formData={this.state}
-                handleFirstNameChange={this.handleFirstNameChange}
-                handleLastNameChange={this.handleLastNameChange}
+                handleChange={this.handleChange}
                 handleSubmit={this.handleFormSubmit}
             />
             <DisplayFormData
