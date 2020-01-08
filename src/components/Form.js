@@ -3,7 +3,12 @@ import React from 'react';
 class Form extends React.Component {
   state = {
     firstName: "",
-    lastName: ""
+    lastName: "",
+    submittedData: [
+      {firstName: 'John',
+       lastName: 'Snow'
+      }
+    ]
   }
 
   handleFirstNameChange = event => {
@@ -27,17 +32,52 @@ class Form extends React.Component {
     })
   }
 
+  
+  // handleSubmit = event => {
+  //   event.preventDefaul(); 
+  //   formData = {
+  //     firstName: this.state.firstName, 
+  //     lastName: this.state.lastName
+  //   }
+  //   this.doSomethingWithThisData(formData)
+  //   /* 👆 This function could be defined in the current component or passed down as a prop. 
+  //     currently, we don't have any server to send our data, see uncommented demonstration.   
+  //   */
+  // } 
 
+  //👇submission demonstration: 
+  handleSubmit = event => {
+    event.preventDefault(); 
+    // event.persist();
+    // console.log(event); 
+    let formData= {
+      firstName: this.state.firstName,
+      lastname: this.state.lastName
+    };
+    this.setState({
+      submittedData:[ ...this.state.submittedData, formData]
+    })
+  }
+
+  listOfSubmissions = () => {
+    return this.state.submittedData.map( data => {
+      return <div><span>{data.firstName}</span> <span>{data.lastName}</span></div>
+    })
+  }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <lable htmlFor='first-name'>First Name </lable>
-        <input type="text" id='first-name' name="firstName" placeholder='first-name' onChange={this.handleFirstNameChange} value={this.state.firstName} />
-        <br></br>
-        <lable htmlFor='last-name'>Last Name </lable>               
-        <input type="text" id='last-name' name="lastName" placeholder='last-name' onChange={event => this.handleLastNameChange(event)} value={this.state.lastName} />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <lable htmlFor='first-name'>First Name </lable>
+          <input type="text" id='first-name' name="firstName" placeholder='first-name' onChange={this.handleFirstNameChange} value={this.state.firstName} />
+          <br></br>
+          <lable htmlFor='last-name'>Last Name </lable>               
+          <input type="text" id='last-name' name="lastName" placeholder='last-name' onChange={event => this.handleLastNameChange(event)} value={this.state.lastName} />
+          <input type='submit'></input>
+        </form>
+        {this.listOfSubmissions()}
+      </div>
     )
   }
 }
